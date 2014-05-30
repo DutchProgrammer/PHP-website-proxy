@@ -1,0 +1,21 @@
+# 1 WEEK
+<filesMatch "\.(ico|jpg|jpeg|png|gif|swf|js|css|eot|woff|ttf|svgz|svg)$">
+  Header set Cache-Control "max-age=2592000, public, must-revalidate"
+  FileETag none
+</filesMatch>
+
+# Expire images header
+ExpiresActive On
+ExpiresByType text/html "access plus 30 seconds"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/jpg "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/ico "access plus 1 month"
+ExpiresByType text/css "access plus 2 weeks"
+ExpiresByType text/javascript "access plus 2 weeks"
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
