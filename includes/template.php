@@ -177,7 +177,7 @@ class template {
 
 		//When we we got less replaces then searches make them the same amount
 		if ($totalSearch !== $totalReplace) {
-			$replace = array_pad($replace, $totalSearch, '');
+			$replace = array_pad($replace, $totalSearch, ($totalReplace === 1 ? reset($replace) : ''));
 		}
 
 		//Merge the replaces with the array that we already got
@@ -195,7 +195,7 @@ class template {
 		$output = &$this->output;
 
 		//Check if we may replace the page content
-		if ($this->doReplace) {
+		if ($this->doReplace && !empty($this->search)) {
 			$output = str_ireplace($this->search, $this->replace, $output);
 		}
 
